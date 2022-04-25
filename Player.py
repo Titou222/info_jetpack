@@ -5,7 +5,7 @@ import time
 
 g = 9.81
 
-class Player(obj.Object):
+class Player(obj):
     def __init__(self, life, x, y, eco):
 
         """Le constructeur de la classe Player.

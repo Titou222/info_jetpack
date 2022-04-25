@@ -8,34 +8,45 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-import main
+from PyQt5.Qt import Qt
+
+import Objects as obj
+
+from tkinter import *
 
 class Ui_Game(object):
     def setupUi(self, Game):
         Game.setObjectName("Game")
-        Game.resize(1080, 720)
-        Game.setMinimumSize(QtCore.QSize(1080, 720))
-        Game.setMaximumSize(QtCore.QSize(2100, 720))
+        Game.resize(1280, 720)
+        Game.setMinimumSize(QtCore.QSize(1280, 720))
+        Game.setMaximumSize(QtCore.QSize(1280, 720))
         self.centralwidget = QtWidgets.QWidget(Game)
         self.centralwidget.setObjectName("centralwidget")
-        self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(0, 0, 1080, 720))
-        self.label.setMinimumSize(QtCore.QSize(1080, 720))
-        self.label.setMaximumSize(QtCore.QSize(1080, 720))
-        self.label.setPixmap(QtGui.QPixmap("image/fond.png"))
-        self.label.setText("")
-        self.label.setObjectName("label")
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
-        self.label_2.setGeometry(QtCore.QRect(40, main.player.y, 80, 80))
+        self.label_2.setGeometry(QtCore.QRect(40, 540, 71, 71))
         self.label_2.setStyleSheet("\n"
-"background-image: url(:/newPrefix/personnage.png);")
+                                   "background-image: url(:/newPrefix/personnage.png);")
         self.label_2.setText("")
-        self.label_2.setPixmap(QtGui.QPixmap("image/personnage.png"))
+        self.label_2.setPixmap(QtGui.QPixmap("personnage.png"))
         self.label_2.setScaledContents(True)
         self.label_2.setObjectName("label_2")
+        self.label = QtWidgets.QLabel(self.centralwidget)
+        self.label.setGeometry(QtCore.QRect(0, 0, 1280, 720))
+        self.label.setStyleSheet("")
+        self.label.setText("")
+        self.label.setPixmap(QtGui.QPixmap("fond.png"))
+        self.label.setObjectName("label")
+        self.lineEdit = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit.setGeometry(QtCore.QRect(0, 0, 1280, 720))
+        self.lineEdit.setStyleSheet("color: rgb(85, 255, 255);\n"
+                                    "background-color: rgb(85, 255, 127,0);")
+        self.lineEdit.setObjectName("lineEdit")
+        self.label.raise_()
+        self.label_2.raise_()
+        self.lineEdit.raise_()
         Game.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(Game)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1080, 26))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1280, 26))
         self.menubar.setObjectName("menubar")
         Game.setMenuBar(self.menubar)
         self.statusbar = QtWidgets.QStatusBar(Game)
@@ -50,19 +61,23 @@ class Ui_Game(object):
         Game.setWindowTitle(_translate("Game", "MainWindow"))
 
 
-def main():
-    import sys
-    app = QtWidgets.QApplication(sys.argv)
-    Game = QtWidgets.QMainWindow()
-    ui = Ui_Game()
-    ui.setupUi(Game)
-    Game.show()
-    sys.exit(app.exec_())
+
 if __name__ == "__main__":
     import sys
+
     app = QtWidgets.QApplication(sys.argv)
     Game = QtWidgets.QMainWindow()
     ui = Ui_Game()
+
     ui.setupUi(Game)
     Game.show()
+
+
+    def quelletouche():
+        print(ui.lineEdit.text())
+        ui.lineEdit.setText("")
+
+
+    ui.lineEdit.textChanged.connect(quelletouche)
+
     sys.exit(app.exec_())
