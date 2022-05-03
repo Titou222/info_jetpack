@@ -8,7 +8,7 @@ class Projectile(pygame.sprite.Sprite):
         self.velocity = 5
         self.player = player
         self.image = pygame.image.load("assets/projectile.png")
-        self.image = pygame.transform.scale(self.image, (50,50))
+        self.image = pygame.transform.scale(self.image, (56,17))
         self.rect = self.image.get_rect()
         self.rect.x = player.rect.x + 120
         self.rect.y = player.rect.y + 80
@@ -25,7 +25,7 @@ class Projectile(pygame.sprite.Sprite):
 
     def move(self):
         self.rect.x += self.velocity
-        self.rotate()
+        #self.rotate()
 
         #check if collision with player
         for monster in self.player.game.check_collision(self, self.player.game.all_monsters):

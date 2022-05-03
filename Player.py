@@ -6,7 +6,7 @@ import animation
 class Player(animation.AnimateSprite):
 
     def __init__(self, game):
-        super().__init__("player")
+        super().__init__("belaunay")
         self.game = game
         self.health = 3
         self.max_health = 3
@@ -14,8 +14,11 @@ class Player(animation.AnimateSprite):
         self.velocity = 5
         self.all_projectiles = pygame.sprite.Group()
         self.rect = self.image.get_rect()
+
         self.rect.x = 40
         self.rect.y = 500
+        self.j = 0
+        self.f = 0
 
     def launch_projectile(self):
         #create a projectile
@@ -44,6 +47,12 @@ class Player(animation.AnimateSprite):
 
     def update_animation(self):
         self.animate()
+
+    def jump(self):
+        self.rect.y -= 0.5 + self.j*0.3
+
+    def fall(self):
+        self.rect.y += 0.5 + self.f*0.4
 
 
 

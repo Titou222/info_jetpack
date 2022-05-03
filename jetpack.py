@@ -5,10 +5,10 @@ pygame.init()
 
 #define a clock
 clock = pygame.time.Clock()
-FPS = 60
+FPS = 500
 
 #generate the window of the game
-pygame.display.set_caption("Jetpack")
+pygame.display.set_caption("STORY OF BELAUNAY : The Quentouan Project")
 
 screen_size_x = 1280
 screen_size_y = 720
@@ -16,13 +16,16 @@ screen = pygame.display.set_mode((screen_size_x,screen_size_y))
 
 
 #import background
-background = pygame.image.load("assets/bg.jpg")
+background = pygame.image.load("assets/bg.png")
+background_rect = background.get_rect()
+background_rect.x = 0
+background_rect.y = 0
 
 #import banner
 banner = pygame.image.load("assets/banner.png")
-banner = pygame.transform.scale(banner, (500,500))
 banner_rect = banner.get_rect()
-banner_rect.x = screen.get_width() // 4
+banner_rect.x = 50
+banner_rect.y = 50
 
 #import button
 play_button = pygame.image.load("assets/button.png")
@@ -38,7 +41,7 @@ running = True
 
 while running:
     #apply background
-    screen.blit(background, (0,-200))
+    screen.blit(background, background_rect)
 
     #check if game is playing
     if game.is_playing:
@@ -50,6 +53,7 @@ while running:
         #add main page
         screen.blit(play_button, play_button_rect)
         screen.blit(banner, banner_rect)
+        game.update_main(screen)
 
 
 
@@ -72,6 +76,40 @@ while running:
             # detect if E is pressed (projectile)
             if event.key == pygame.K_e:
                 game.player.launch_projectile()
+            letters_dictionnary = {
+                113 : "a",
+                98 : "b",
+                99 : "c",
+                100 : "d",
+                101 : "e",
+                102 : "f",
+                103 : "g",
+                104 : "h",
+                105 : "i",
+                106 : "j",
+                107 : "k",
+                108 : "l",
+                59 : "m",
+                110: "n",
+                111 : "o",
+                112 : "p",
+                97 : "q",
+                114 : "r",
+                115 : "s",
+                116 : "t",
+                117 : "u",
+                118 : "v",
+                122 : "w",
+                120 : "x",
+                121 : "y",
+                119 : "z",
+
+
+
+            }
+            if not(game.is_playing):
+                game.name += str(letters_dictionnary[event.key])
+
 
         elif event.type == pygame.KEYUP:
             game.pressed[event.key] = False
